@@ -1,6 +1,7 @@
 ﻿using APDS_ICE_1.Entities;
 using APDS_ICE_1.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Identity.Client;
 
 namespace APDS_ICE_1.Controllers
 {
@@ -53,7 +54,35 @@ namespace APDS_ICE_1.Controllers
 
             return View(model);
         }
-            
+
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public IActionResult Login(LoginViewModel model)
+        {
+            if (ModelState.IsValid) 
+            {
+                var user = _context.Accounts.Where(x => x.UserName == model.UserNameOrdEmail || x.Email== model.UserNameOrdEmail && x.Password == model.Password).FirstOrDefault();
+                if (user != null) 
+                {
+                    //  sucess
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Username/Email or password is not correct");
+                }
+                 
+            }
+            return View(model);
+
+        }
+        public IActionResult SecurePage()
+        {
+            return View();
         }
     }
 }

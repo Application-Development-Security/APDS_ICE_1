@@ -1,3 +1,7 @@
+using APDS_ICE_1.Entities;
+using Microsoft.EntityFrameworkCore;
+
+
 namespace APDS_ICE_1
 {
     public class Program
@@ -5,6 +9,8 @@ namespace APDS_ICE_1
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();

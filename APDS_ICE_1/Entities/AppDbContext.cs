@@ -9,7 +9,7 @@ namespace APDS_ICE_1.Entities
             
         }
 
-        public DbSet<Accounts>accounts { get; set; }
+        public DbSet<Accounts>Accounts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
